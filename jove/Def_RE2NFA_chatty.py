@@ -235,7 +235,7 @@ def mk_eps_nfa():
 
 def p_expression_ordy_str(t):
     'ordyexp : STR'
-    print("Receive a string, which is " + t)
+    print("Receive a string, which is " + t[1])
     t[0] = mk_symbol_nfa(t[1])
 
 def mk_symbol_nfa(a):
