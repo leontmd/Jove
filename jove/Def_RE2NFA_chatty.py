@@ -100,9 +100,12 @@ def p_expression_plus(t):
 def mk_plus_nfa(N1, N2):
     """Given two NFAs, return their union.
     """
-    print("Given the parse of two NFA, making one PLUS-connected NFA")
+    print("Given the parse of two NFA, making one PLUS-connected NFA abc")
+    print("something")
     delta_accum = dict({})
+    print("something")
     delta_accum.update(N1["Delta"])
+    print("something")
     delta_accum.update(N2["Delta"]) # Simply accumulate the transitions
     # The alphabet is inferred bottom-up; thus we must union the Sigmas 
     # of the NFAs!
@@ -117,6 +120,7 @@ def mk_plus_nfa(N1, N2):
 def p_expression_plus_id(t):
     '''expression : catexp'''
     # Simply inherit the attribute from t[1] and pass on
+    print("something")
     t[0] = t[1] 
 
 #-- * The C -> C O production
@@ -140,8 +144,10 @@ def mk_cat_nfa(N1, N2):
         if (f, "") in N1["Delta"]: 
             delta_accum.update({ (f,""):(N2["Q0"] | N1["Delta"][(f, "")])
                                })
+            print("something")
         else:
             delta_accum.update({ (f, ""): N2["Q0"] })
+            print("another something")
     # In syntax-directed translation, it is impossible
     # that N2 and N1 have common states. Check anyhow
     # in case there are bugs elsewhere that cause it.
@@ -157,6 +163,7 @@ def mk_cat_nfa(N1, N2):
 def p_expression_cat_id(t):
     '''catexp :  ordyexp'''
     # Simply inherit the attribute from t[1] and pass on
+    print("4")
     t[0] = t[1]
 
 #-- * The O -> O STAR production
@@ -235,7 +242,7 @@ def mk_symbol_nfa(a):
     """The NFA for a single re letter
     """
     # Make a fresh initial state
-    print("Make a symbol NFA for a single regular expression letter")
+    print("Make a symbol NFA for a single re-letter")
     q0 = NxtStateStr()
     Q0 = set({ q0 })
     # Make a fresh final state
