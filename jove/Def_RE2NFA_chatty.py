@@ -100,7 +100,7 @@ def p_expression_plus(t):
 def mk_plus_nfa(N1, N2):
     """Given two NFAs, return their union.
     """
-    print("Given the parse of two NFA, making one PLUS-connected NFA")
+    print("Given the parse of two NFA, making one PLUS-connected NFA abc")
     print("something")
     delta_accum = dict({})
     print("something")
