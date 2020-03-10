@@ -100,12 +100,9 @@ def p_expression_plus(t):
 def mk_plus_nfa(N1, N2):
     """Given two NFAs, return their union.
     """
-    print("Given the parse of two NFA, making one PLUS-connected NFA abc")
-    print("something")
+    print("Given the parse of two NFA, making one PLUS-connected NFA")
     delta_accum = dict({})
-    print("something")
     delta_accum.update(N1["Delta"])
-    print("something")
     delta_accum.update(N2["Delta"]) # Simply accumulate the transitions
     # The alphabet is inferred bottom-up; thus we must union the Sigmas 
     # of the NFAs!
@@ -120,7 +117,6 @@ def mk_plus_nfa(N1, N2):
 def p_expression_plus_id(t):
     '''expression : catexp'''
     # Simply inherit the attribute from t[1] and pass on
-    print("something")
     t[0] = t[1] 
 
 #-- * The C -> C O production
@@ -144,10 +140,8 @@ def mk_cat_nfa(N1, N2):
         if (f, "") in N1["Delta"]: 
             delta_accum.update({ (f,""):(N2["Q0"] | N1["Delta"][(f, "")])
                                })
-            print("something")
         else:
             delta_accum.update({ (f, ""): N2["Q0"] })
-            print("another something")
     # In syntax-directed translation, it is impossible
     # that N2 and N1 have common states. Check anyhow
     # in case there are bugs elsewhere that cause it.
@@ -163,7 +157,6 @@ def mk_cat_nfa(N1, N2):
 def p_expression_cat_id(t):
     '''catexp :  ordyexp'''
     # Simply inherit the attribute from t[1] and pass on
-    print("4")
     t[0] = t[1]
 
 #-- * The O -> O STAR production
@@ -181,7 +174,7 @@ def mk_star_nfa(N):
     # 3) Make N[F] non-final
     # 4) Spin back from every state in N[F] to Q0
     #
-    print("5")
+    print("Making an NFA for the preceded components when applying the star '*' operator...")
     delta_accum = dict({})
     IF = NxtStateStr()
     Q0 = set({ IF }) # new set of start + final states
@@ -216,13 +209,13 @@ def p_expression_ordy_paren(t):
     
 def p_expression_ordy_eps(t):
     'ordyexp : EPS'
-    print("epsilon")
+    print("Receive an Epsilon symbol, which is ''")
     t[0] = mk_eps_nfa()
 
 def mk_eps_nfa():
     """An nfa with exactly one start+final state
     """
-    print("7")
+    print("Make an NFA for the Epsilon Symbol")
     Q0 = set({ NxtStateStr() })
     F  = Q0
     return mk_nfa(Q     = Q0, 
@@ -235,14 +228,14 @@ def mk_eps_nfa():
 
 def p_expression_ordy_str(t):
     'ordyexp : STR'
-    print("Receive a string, which is " + t[1])
+    print("Receive a string, which is " + "'" + t[1] + "'")
     t[0] = mk_symbol_nfa(t[1])
 
 def mk_symbol_nfa(a):
     """The NFA for a single re letter
     """
     # Make a fresh initial state
-    print("Make a symbol NFA for a single re-letter")
+    print("Make a symbol NFA for a single re-letter, which is " + "'" + a + "'")
     q0 = NxtStateStr()
     Q0 = set({ q0 })
     # Make a fresh final state
