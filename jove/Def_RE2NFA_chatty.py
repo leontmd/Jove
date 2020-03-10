@@ -101,6 +101,7 @@ def mk_plus_nfa(N1, N2):
     """Given two NFAs, return their union.
     """
     print("Given the parse of two NFA, making one PLUS-connected NFA")
+    print("something")
     delta_accum = dict({})
     print("something")
     delta_accum.update(N1["Delta"])
