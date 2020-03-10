@@ -116,16 +116,19 @@ def mk_plus_nfa(N1, N2):
     
 def p_expression_plus_id(t):
     '''expression : catexp'''
-    # Simply inherit the attribute from t[1] and pass on    
+    # Simply inherit the attribute from t[1] and pass on
+    print("1")
     t[0] = t[1] 
 
 #-- * The C -> C O production
 
 def p_expression_cat(t):
     '''catexp :  catexp ordyexp'''
+    print("2")
     t[0] = mk_cat_nfa(t[1], t[2])
 
 def mk_cat_nfa(N1, N2):
+    print("3")
     delta_accum = dict({}) 
     delta_accum.update(N1["Delta"])
     delta_accum.update(N2["Delta"])
@@ -155,12 +158,14 @@ def mk_cat_nfa(N1, N2):
 def p_expression_cat_id(t):
     '''catexp :  ordyexp'''
     # Simply inherit the attribute from t[1] and pass on
+    print("4")
     t[0] = t[1]
 
 #-- * The O -> O STAR production
 
 def p_expression_ordy_star(t):
     'ordyexp : ordyexp STAR'
+    print("star")
     t[0] = mk_star_nfa(t[1])
 
 def mk_star_nfa(N):
@@ -171,6 +176,7 @@ def mk_star_nfa(N):
     # 3) Make N[F] non-final
     # 4) Spin back from every state in N[F] to Q0
     #
+    print("5")
     delta_accum = dict({})
     IF = NxtStateStr()
     Q0 = set({ IF }) # new set of start + final states
@@ -198,17 +204,20 @@ def mk_star_nfa(N):
 def p_expression_ordy_paren(t):
     'ordyexp : LPAREN expression RPAREN'
     # Simply inherit the attribute from t[2] and pass on
+    print("6")
     t[0] = t[2]
 
 #-- * The O -> EPS production
     
 def p_expression_ordy_eps(t):
     'ordyexp : EPS'
+    print("epsilon")
     t[0] = mk_eps_nfa()
 
 def mk_eps_nfa():
     """An nfa with exactly one start+final state
     """
+    print("7")
     Q0 = set({ NxtStateStr() })
     F  = Q0
     return mk_nfa(Q     = Q0, 
@@ -221,12 +230,14 @@ def mk_eps_nfa():
 
 def p_expression_ordy_str(t):
     'ordyexp : STR'
+    print("8")
     t[0] = mk_symbol_nfa(t[1])
 
 def mk_symbol_nfa(a):
     """The NFA for a single re letter
     """
     # Make a fresh initial state
+    print("9")
     q0 = NxtStateStr()
     Q0 = set({ q0 })
     # Make a fresh final state
