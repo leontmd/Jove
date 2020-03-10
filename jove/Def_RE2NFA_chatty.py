@@ -209,7 +209,7 @@ def p_expression_ordy_paren(t):
     
 def p_expression_ordy_eps(t):
     'ordyexp : EPS'
-    print("Receive an Epsilon symbol, which is '' ...")
+    print("Received an Epsilon symbol, which is '' ...")
     t[0] = mk_eps_nfa()
 
 def mk_eps_nfa():
@@ -228,7 +228,7 @@ def mk_eps_nfa():
 
 def p_expression_ordy_str(t):
     'ordyexp : STR'
-    print("Receive a string, which is " + "'" + t[1] + "'...")
+    print("Received a symbol, which is " + "'" + t[1] + "'...")
     t[0] = mk_symbol_nfa(t[1])
 
 def mk_symbol_nfa(a):
