@@ -102,7 +102,9 @@ def mk_plus_nfa(N1, N2):
     """
     print("Given the parse of two NFA, making one PLUS-connected NFA")
     delta_accum = dict({})
+    print("something")
     delta_accum.update(N1["Delta"])
+    print("something")
     delta_accum.update(N2["Delta"]) # Simply accumulate the transitions
     # The alphabet is inferred bottom-up; thus we must union the Sigmas 
     # of the NFAs!
@@ -117,14 +119,14 @@ def mk_plus_nfa(N1, N2):
 def p_expression_plus_id(t):
     '''expression : catexp'''
     # Simply inherit the attribute from t[1] and pass on
-    print("1")
+    print("something")
     t[0] = t[1] 
 
 #-- * The C -> C O production
 
 def p_expression_cat(t):
     '''catexp :  catexp ordyexp'''
-    print("2")
+    print("Got a 'cat' expression")
     t[0] = mk_cat_nfa(t[1], t[2])
 
 def mk_cat_nfa(N1, N2):
@@ -141,8 +143,10 @@ def mk_cat_nfa(N1, N2):
         if (f, "") in N1["Delta"]: 
             delta_accum.update({ (f,""):(N2["Q0"] | N1["Delta"][(f, "")])
                                })
+            print("something")
         else:
             delta_accum.update({ (f, ""): N2["Q0"] })
+            print("another something")
     # In syntax-directed translation, it is impossible
     # that N2 and N1 have common states. Check anyhow
     # in case there are bugs elsewhere that cause it.
