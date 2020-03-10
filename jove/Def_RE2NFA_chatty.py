@@ -94,7 +94,7 @@ precedence = (
 
 def p_expression_plus(t):
     '''expression : expression PLUS catexp'''
-    print("Got a plus token")
+    print("Received a plus token")
     t[0] = mk_plus_nfa(t[1], t[3]) # Union of the two NFAs is returned
     
 def mk_plus_nfa(N1, N2):
@@ -163,7 +163,7 @@ def p_expression_cat_id(t):
 
 def p_expression_ordy_star(t):
     'ordyexp : ordyexp STAR'
-    print("star")
+    print("Received a star symbol....")
     t[0] = mk_star_nfa(t[1])
 
 def mk_star_nfa(N):
@@ -202,20 +202,20 @@ def mk_star_nfa(N):
 def p_expression_ordy_paren(t):
     'ordyexp : LPAREN expression RPAREN'
     # Simply inherit the attribute from t[2] and pass on
-    print("6")
+    print("The tokens received are covered in a(nother) pair of parentheses...")
     t[0] = t[2]
 
 #-- * The O -> EPS production
     
 def p_expression_ordy_eps(t):
     'ordyexp : EPS'
-    print("Receive an Epsilon symbol, which is ''")
+    print("Receive an Epsilon symbol, which is '' ...")
     t[0] = mk_eps_nfa()
 
 def mk_eps_nfa():
     """An nfa with exactly one start+final state
     """
-    print("Make an NFA for the Epsilon Symbol")
+    print("Making an NFA for the Epsilon Symbol...")
     Q0 = set({ NxtStateStr() })
     F  = Q0
     return mk_nfa(Q     = Q0, 
@@ -228,14 +228,14 @@ def mk_eps_nfa():
 
 def p_expression_ordy_str(t):
     'ordyexp : STR'
-    print("Receive a string, which is " + "'" + t[1] + "'")
+    print("Receive a string, which is " + "'" + t[1] + "'...")
     t[0] = mk_symbol_nfa(t[1])
 
 def mk_symbol_nfa(a):
     """The NFA for a single re letter
     """
     # Make a fresh initial state
-    print("Make a symbol NFA for a single re-letter, which is " + "'" + a + "'")
+    print("Make a symbol NFA for a single re-letter, which is " + "'" + a + "'....")
     q0 = NxtStateStr()
     Q0 = set({ q0 })
     # Make a fresh final state
