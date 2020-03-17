@@ -127,7 +127,7 @@ def p_expression_cat(t):
     print("The previous tokens are concatenated")
 
 def mk_cat_nfa(N1, N2):
-    print(N1["Sigma"]+N2["Sigma"])
+    print(a+b for a in N1["Sigma"] for b in N2["Sigma"])
     delta_accum = dict({}) 
     delta_accum.update(N1["Delta"])
     delta_accum.update(N2["Delta"])
