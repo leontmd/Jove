@@ -123,8 +123,8 @@ def p_expression_plus_id(t):
 
 def p_expression_cat(t):
     '''catexp :  catexp ordyexp'''
-    print("Got a 'cat' expression")
     t[0] = mk_cat_nfa(t[1], t[2])
+    print("The previous tokens are concatenated, the result is: " + t[0])
 
 def mk_cat_nfa(N1, N2):
     print("3")
