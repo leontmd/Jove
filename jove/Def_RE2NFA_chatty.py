@@ -123,8 +123,9 @@ def p_expression_plus_id(t):
 
 def p_expression_cat(t):
     '''catexp :  catexp ordyexp'''
-    t[0] = mk_cat_nfa(t[1], t[2])
     print("The previous tokens are concatenated")
+    t[0] = mk_cat_nfa(t[1], t[2])
+
 
 def mk_cat_nfa(N1, N2):
     string = ''
@@ -132,7 +133,7 @@ def mk_cat_nfa(N1, N2):
         string += a
     for b in N2["Sigma"]:
         string += b
-    print("The symbols after being concatenated is the string: " + string)
+    print("The symbols after being concatenated is the string: " + "'" + string + "'")
     delta_accum = dict({}) 
     delta_accum.update(N1["Delta"])
     delta_accum.update(N2["Delta"])
