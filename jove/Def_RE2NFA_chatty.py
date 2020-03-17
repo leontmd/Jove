@@ -137,6 +137,7 @@ def mk_cat_nfa(N1, N2):
     delta_accum = dict({}) 
     delta_accum.update(N1["Delta"])
     delta_accum.update(N2["Delta"])
+    print("Making a NFA for the concatenated symbols.....")
     # Now, introduce moves from every one of N1's final states
     # to the set of N2's initial states.
     for f in N1["F"]:
@@ -148,6 +149,7 @@ def mk_cat_nfa(N1, N2):
                                })
         else:
             delta_accum.update({ (f, ""): N2["Q0"] })
+    print("Finished making the Delta for the NFA with the concatenation operator...")
     # In syntax-directed translation, it is impossible
     # that N2 and N1 have common states. Check anyhow
     # in case there are bugs elsewhere that cause it.
@@ -163,6 +165,7 @@ def mk_cat_nfa(N1, N2):
 def p_expression_cat_id(t):
     '''catexp :  ordyexp'''
     # Simply inherit the attribute from t[1] and pass on
+    print("Flag number 1")
     t[0] = t[1]
 
 #-- * The O -> O STAR production
@@ -196,6 +199,7 @@ def mk_star_nfa(N):
             delta_accum.update({ (f, ""): (Q0 | N["Delta"][(f, "")]) })
         else:
             delta_accum.update({ (f, ""): Q0 })
+    print("Finished making the Delta for the NFA with the STAR operator...")
     #
     return mk_nfa(Q     = N["Q"] | Q0, 
                   Sigma = N["Sigma"], 
