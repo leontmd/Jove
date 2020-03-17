@@ -94,7 +94,7 @@ precedence = (
 
 def p_expression_plus(t):
     '''expression : expression PLUS catexp'''
-    print("Received a plus token")
+    print("Received a PLUS token")
     t[0] = mk_plus_nfa(t[1], t[3]) # Union of the two NFAs is returned
     
 def mk_plus_nfa(N1, N2):
@@ -163,7 +163,7 @@ def p_expression_cat_id(t):
 
 def p_expression_ordy_star(t):
     'ordyexp : ordyexp STAR'
-    print("Received a star symbol....")
+    print("Received a STAR operator....")
     t[0] = mk_star_nfa(t[1])
 
 def mk_star_nfa(N):
@@ -202,7 +202,7 @@ def mk_star_nfa(N):
 def p_expression_ordy_paren(t):
     'ordyexp : LPAREN expression RPAREN'
     # Simply inherit the attribute from t[2] and pass on
-    print("The tokens received are covered in a(nother) pair of parentheses...")
+    print("The previous token(s) is/are enclosed in a(nother) pair of parentheses...")
     t[0] = t[2]
 
 #-- * The O -> EPS production
