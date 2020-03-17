@@ -165,7 +165,7 @@ def mk_cat_nfa(N1, N2):
 def p_expression_cat_id(t):
     '''catexp :  ordyexp'''
     # Simply inherit the attribute from t[1] and pass on
-    print("Flag number 1")
+    print("Moving to the next token....")
     t[0] = t[1]
 
 #-- * The O -> O STAR production
@@ -245,7 +245,7 @@ def mk_symbol_nfa(a):
     """The NFA for a single re letter
     """
     # Make a fresh initial state
-    print("Make a symbol NFA for a single re-letter, which is " + "'" + a + "'....")
+    print("Making a symbol NFA for a single re-letter, which is " + "'" + a + "'....")
     q0 = NxtStateStr()
     Q0 = set({ q0 })
     # Make a fresh final state
